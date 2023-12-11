@@ -12,7 +12,7 @@ function StatsGrid() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/stats-demo-server/v1"
+          `http://${process.env.HOSTNAME}:3001/stats-demo-server/v1`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");

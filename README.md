@@ -14,6 +14,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+To run locally, you need to point `stats-demo-server` in your hosts to `localhost` if running the backend locally
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
@@ -72,9 +74,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Docker
 
 ### Build
-
+Add HOSTNAME as arg
 ```bash
-docker build -t stats-demo-ui .
+docker build -t stats-demo-ui --build-arg HOSTNAME=localhost .
 ```
 
 ### Run

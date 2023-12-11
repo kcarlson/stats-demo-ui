@@ -37,4 +37,4 @@ spec:
       port: 3000
       targetPort: 3000
   selector:
-    app: stats-demo-ui
+    app: stats-lb

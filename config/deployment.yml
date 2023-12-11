@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stats-demo-server
+  name: stats-demo-ui
   labels:
-    app: stats-demo-server
+    app: stats-demo-ui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: stats-demo-server
+      app: stats-demo-ui
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app: stats-demo-server
+        app: stats-demo-ui
     spec:
       containers:
-      - name: stats-demo-server
+      - name: stats-demo-ui
         image: <IMAGE>
         ports:
         - containerPort: 3001
@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: stats-demo-server-service
+  name: stats-demo-ui-service
 spec:
   type: LoadBalancer
   ports:
@@ -37,4 +37,4 @@ spec:
       port: 3001
       targetPort: 3001
   selector:
-    app: stats-demo-server
+    app: stats-demo-ui

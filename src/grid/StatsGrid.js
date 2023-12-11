@@ -3,12 +3,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import StatObject from "./StatObject";
 import AddStats from "./AddStats";
+import { useWebSocket } from "../WebSocketContext";
 
 function StatsGrid({ backendHost }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // TODO: Reconnect on close
+  const socket = useWebSocket();
+
   useEffect(() => {
+    if (!socket) {
+      // Wait for socket to be ready
+      return;
+    }
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -21,6 +27,16 @@ function StatsGrid({ backendHost }) {
         console.log(result);
         setData(result);
         setIsLoading(false);
+        // Listen for new stats
+        socket.addEventListener("message", (event) => {
+          const data = JSON.parse(event.data);
+          if (!data.updated) {
+            return;
+          }
+          setIsLoading(true);
+          setData(data);
+          setIsLoading(false);
+        });
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -28,14 +44,7 @@ function StatsGrid({ backendHost }) {
     };
 
     fetchData();
-  }, [backendHost]);
-
-  const handleOnAdd = (newData) => {
-    setIsLoading(true);
-    console.log("Success:", newData);
-    setData(newData);
-    setIsLoading(false);
-  };
+  }, [backendHost, socket]);
 
   return (
     <div>
@@ -47,7 +56,7 @@ function StatsGrid({ backendHost }) {
             {data.stats.map((item, index) => (
               <StatObject key={index} {...item} />
             ))}
-            <AddStats onAdd={handleOnAdd} backendHost={backendHost} />
+            <AddStats backendHost={backendHost} />
           </Row>
         </Container>
       )}

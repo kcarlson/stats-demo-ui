@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 
-function AddStats({ onAdd, backendHost }) {
+function AddStats({ backendHost }) {
   const [inputValue, setInputValue] = useState(""); // State to hold input field value
 
   const handleInputChange = (event) => {
@@ -33,9 +33,7 @@ function AddStats({ onAdd, backendHost }) {
         throw new Error("Network response was not ok.");
       }
 
-      // Handle the API response
-      const data = await response.json();
-      onAdd(data);
+      await response.json();
     } catch (error) {
       console.error("Error:", error);
     }

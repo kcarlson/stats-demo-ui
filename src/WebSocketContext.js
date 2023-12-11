@@ -9,6 +9,7 @@ export const WebSocketProvider = ({ backendHost, children }) => {
   useEffect(() => {
     const ws = new WebSocket(`ws://${backendHost}:3001/stats-demo-server/v1`);
     setSocket(ws);
+    // TODO: Reconnect on close
     // Dispose of socket
     return () => {
       if (ws?.readyState === WebSocket.OPEN) {

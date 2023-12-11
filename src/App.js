@@ -2,12 +2,13 @@ import "./App.css";
 import StatsGrid from "./grid/StatsGrid";
 import { WebSocketProvider } from "./WebSocketContext";
 
-function App() {
+function App({ backendHost }) {
+  console.log("backendHost", backendHost);
   return (
-    <WebSocketProvider>
+    <WebSocketProvider backendHost={backendHost}>
       <div className="App">
         <header className="App-header"></header>
-        <StatsGrid />
+        <StatsGrid backendHost={backendHost} />
       </div>
     </WebSocketProvider>
   );

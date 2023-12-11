@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 
-function AddStats({ onAdd }) {
+function AddStats({ onAdd, backendHost }) {
   const [inputValue, setInputValue] = useState(""); // State to hold input field value
 
   const handleInputChange = (event) => {
@@ -11,7 +11,6 @@ function AddStats({ onAdd }) {
   // Add button inside to add a new stat object to the DOM and call the backend
   const handleClick = async () => {
     try {
-      console.log("inputValue:", inputValue);
       const requestBody = {
         stats: [
           {
@@ -20,7 +19,7 @@ function AddStats({ onAdd }) {
         ],
       };
       const response = await fetch(
-        `http://${process.env.HOSTNAME}:3001/stats-demo-server/v1`,
+        `http://${backendHost}:3001/stats-demo-server/v1`,
         {
           method: "POST",
           headers: {
@@ -49,7 +48,7 @@ function AddStats({ onAdd }) {
   };
 
   return (
-    <Col>
+    <Col xs={12} md={6}>
       <div className="square border border-dark p-4 position-relative">
         <div className="position-absolute top-0 start-0 text-white bg-dark p-2">
           <input

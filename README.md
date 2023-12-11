@@ -74,9 +74,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Docker
 
 ### Build
-Add HOSTNAME as arg
+Add REACT_APP_BACKEND_HOST as arg if desired
 ```bash
-docker build -t stats-demo-ui --build-arg HOSTNAME=localhost .
+docker build -t stats-demo-ui --build-arg REACT_APP_BACKEND_HOST=<backend-host-name-or-ip> .
 ```
 
 ### Run

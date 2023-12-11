@@ -17,7 +17,7 @@ jobs:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
     - name: Build container image
-      run: docker build -t registry.digitalocean.com/kcarlson/stats-demo-ui:$(echo $GITHUB_SHA | head -c7) --build-arg HOSTNAME=${{ secrets.BACKEND_IP }} .
+      run: docker build -t registry.digitalocean.com/kcarlson/stats-demo-ui:$(echo $GITHUB_SHA | head -c7) --build-arg REACT_APP_BACKEND_HOST=${{ secrets.BACKEND_IP }} .
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200

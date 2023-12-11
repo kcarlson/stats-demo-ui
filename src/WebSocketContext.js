@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const WS_ENDPOINT = `ws://${process.env.HOSTNAME}:3001/stats-demo-server/v1`;
-
 const WebSocketContext = createContext(null);
 
 export const useWebSocket = () => useContext(WebSocketContext);
 
-export const WebSocketProvider = ({ children }) => {
+export const WebSocketProvider = ({ backendHost, children }) => {
   const [socket, setSocket] = useState(null);
   useEffect(() => {
-    const ws = new WebSocket(WS_ENDPOINT);
+    const ws = new WebSocket(`ws://${backendHost}:3001/stats-demo-server/v1`);
     setSocket(ws);
     // Dispose of socket
     return () => {
@@ -17,7 +15,7 @@ export const WebSocketProvider = ({ children }) => {
         ws.close();
       }
     };
-  }, []);
+  }, [backendHost]);
 
   return (
     <WebSocketContext.Provider value={socket}>

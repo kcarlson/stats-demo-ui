@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import StatObject from "./StatObject";
 import AddStats from "./AddStats";
 
-function StatsGrid() {
+function StatsGrid({ backendHost }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   // TODO: Reconnect on close
@@ -12,7 +12,7 @@ function StatsGrid() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${process.env.HOSTNAME}:3001/stats-demo-server/v1`
+          `http://${backendHost}:3001/stats-demo-server/v1`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -28,7 +28,7 @@ function StatsGrid() {
     };
 
     fetchData();
-  }, []);
+  }, [backendHost]);
 
   const handleOnAdd = (newData) => {
     setIsLoading(true);
@@ -47,7 +47,7 @@ function StatsGrid() {
             {data.stats.map((item, index) => (
               <StatObject key={index} {...item} />
             ))}
-            <AddStats onAdd={handleOnAdd} />
+            <AddStats onAdd={handleOnAdd} backendHost={backendHost} />
           </Row>
         </Container>
       )}

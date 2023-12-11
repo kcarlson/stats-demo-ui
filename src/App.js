@@ -1,12 +1,15 @@
 import "./App.css";
 import StatsGrid from "./grid/StatsGrid";
+import { WebSocketProvider } from "./WebSocketContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-      <StatsGrid />
-    </div>
+    <WebSocketProvider>
+      <div className="App">
+        <header className="App-header"></header>
+        <StatsGrid />
+      </div>
+    </WebSocketProvider>
   );
 }
 

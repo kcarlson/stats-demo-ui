@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import StatObject from "./StatObject";
+import AddStats from "./AddStats";
 
 function StatsGrid() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  // TODO: Reconnect on close
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,8 +27,15 @@ function StatsGrid() {
       }
     };
 
-    fetchData(); // Invoke the fetch function
-  }, []); // Empty dependency array ensures useEffect runs only once on component mount
+    fetchData();
+  }, []);
+
+  const handleOnAdd = (newData) => {
+    setIsLoading(true);
+    console.log("Success:", newData);
+    setData(newData);
+    setIsLoading(false);
+  };
 
   return (
     <div>
@@ -39,6 +47,7 @@ function StatsGrid() {
             {data.stats.map((item, index) => (
               <StatObject key={index} {...item} />
             ))}
+            <AddStats onAdd={handleOnAdd} />
           </Row>
         </Container>
       )}

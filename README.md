@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# stats-demo-ui
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Docker
+
+### Build
+
+```bash
+docker build -t stats-demo-ui .
+```
+
+### Run
+
+```bash
+docker run -it -p 3000:3000 stats-demo-ui
+```

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const WS_ENDPOINT = "ws://localhost:3001/stats-demo-server/v1";
+const WS_ENDPOINT = `ws://${window.location.hostname}:3001/stats-demo-server/v1`;
 
 const WebSocketContext = createContext(null);
 

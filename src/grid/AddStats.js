@@ -20,7 +20,7 @@ function AddStats({ onAdd }) {
         ],
       };
       const response = await fetch(
-        "http://localhost:3001/stats-demo-server/v1",
+        `http://${window.location.hostname}:3001/stats-demo-server/v1`,
         {
           method: "POST",
           headers: {

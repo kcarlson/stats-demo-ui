@@ -30,6 +30,17 @@ function StatObject(props) {
         <div className="position-absolute bottom-0 end-0 text-white bg-dark p-2">
           Max: {socketData?.max ?? max}
         </div>
+        <button
+          className="btn btn-danger position-absolute top-0 end-0 m-2"
+          style={{
+            fontSize: "1rem",
+            borderRadius: "50%",
+            padding: "0.1rem 0.5rem",
+          }}
+          onClick={() => props.onDelete(name)}
+        >
+          X
+        </button>
       </div>
     </Col>
   );

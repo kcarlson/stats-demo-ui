@@ -46,6 +46,23 @@ function StatsGrid({ backendHost }) {
     fetchData();
   }, [backendHost, socket]);
 
+  const onDelete = async (name) => {
+    try {
+      const response = await fetch(
+        `http://${backendHost}:3001/stats-demo-server/v1/${name}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete stat");
+      }
+      await response.json();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -54,7 +71,7 @@ function StatsGrid({ backendHost }) {
         <Container fluid="md">
           <Row>
             {data.stats.map((item, index) => (
-              <StatObject key={index} {...item} />
+              <StatObject key={index} {...item} onDelete={onDelete} />
             ))}
             <AddStats backendHost={backendHost} />
           </Row>
